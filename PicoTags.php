@@ -83,7 +83,10 @@ class PicoTags extends AbstractPicoPlugin
      */
     private static function parseTags($tags)
     {
-        $tags = empty($tags) ? [] : explode(',', $tags);
-        return array_map('trim', $tags);
+        if (is_string($tags)) {
+            $tags = explode(',', $tags);
+        }
+
+        return is_array($tags) ? array_map('trim', $tags) : [];
     }
 }
