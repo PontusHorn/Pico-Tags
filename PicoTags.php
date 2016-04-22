@@ -87,6 +87,6 @@ class PicoTags extends AbstractPicoPlugin
             $tags = explode(',', $tags);
         }
 
-        return is_array($tags) ? array_map('trim', $tags) : [];
+        return is_array($tags) ? array_map('trim', $tags) : array();
     }
 }
