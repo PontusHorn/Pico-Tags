@@ -23,7 +23,8 @@ To assign tags to a page, specify the `Tags` header inside the meta header block
 ---
 Title: My first blog post
 Date: 2015-09-16 13:37:00
-Tags: foo, bar, blog
+Description: A thrilling, must-read blog post about pancakes.
+Tags: blog, pancakes
 Template: blog-post
 ---
 ```
@@ -37,6 +38,8 @@ Title: Blog
 Filter: blog
 Template: blog-list
 ---
+
+These are all my blog posts:
 ```
 
 Actually looping through the filtered list of pages (in the above case, pages tagged `blog`) to display them would be
