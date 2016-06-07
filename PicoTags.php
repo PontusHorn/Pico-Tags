@@ -83,7 +83,7 @@ class PicoTags extends AbstractPicoPlugin
      */
     private static function parseTags($tags)
     {
-        if (is_string($tags)) {
+        if (is_string($tags) && (strpos($tags, ',') !== false)) {
             $tags = explode(',', $tags);
         }
 
