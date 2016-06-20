@@ -16,7 +16,7 @@
  *
  * @author Pontus Horn
  * @link https://pontushorn.me
- * @repository https://
+ * @repository https://github.com/PontusHorn/Pico-Tags
  * @license http://opensource.org/licenses/MIT
  */
 
