@@ -34,6 +34,7 @@ class PicoTags extends AbstractPicoPlugin
     {
         $headers['tags'] = 'Tags';
         $headers['filter'] = 'Filter';
+        $headers['filterGetParam'] = 'FilterGetParam';
     }
 
     /**
@@ -45,8 +46,12 @@ class PicoTags extends AbstractPicoPlugin
      */
     public function onMetaParsed(&$meta)
     {
+        $urlFilter = array();
+        if($meta['filterGetParam'] && filter_has_var(INPUT_GET, $meta['filterGetParam'])) {
+            $urlFilter = PicoTags::parseTags(filter_input(INPUT_GET, $meta['filterGetParam']));
+        }
         $meta['tags'] = PicoTags::parseTags($meta['tags']);
-        $meta['filter'] = PicoTags::parseTags($meta['filter']);
+        $meta['filter'] = array_merge($urlFilter, PicoTags::parseTags($meta['filter']));
     }
 
     /**

@@ -55,3 +55,16 @@ done in the template file, e.g.:
     </article>
 {% endfor %}
 ```
+
+To only show pages with tags specified via URL parameter, use the `FilterGetParam` header, e.g.:
+
+### In blog/index.md
+```
+---
+Title: Blog
+FilterGetParam: filter
+Template: blog-list
+---
+```
+
+After that, you can filter the list from URL like `?filter=blog`
