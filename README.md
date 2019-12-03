@@ -55,3 +55,51 @@ done in the template file, e.g.:
     </article>
 {% endfor %}
 ```
+
+To create a dedicated tags page for either showing a list of available tags or a list of
+documents with a specific tag, use the builtin `tags_all()` function:
+
+Create a document `tags.md` in the root of the site:
+
+```
+---
+Title: Tags
+Template: tags
+---
+
+Content can go here
+
+```
+
+The tags template can look like this:
+
+```
+{% extends "index.twig" %}
+{% set tag = url_param('tag', 'string') %}
+{% set tags = tags_all() %}
+{% block content %}
+{{ parent() }}
+{% if tag %}
+    <ul>
+    {% for page in pages if page.title and tags and not (page.id ends with 'index') %}
+        {% set pageTags = page.meta.tags|split(',') %}
+        {% if tag in pageTags %}
+            <li><a href="{{ page.url }}">
+            {{ page.title }} - {{ page.meta.tags }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    No tag given:
+    <ul>
+    {% for tag in tags %}
+        <li><a href="{{current_page.url}}/?tag={{ tag }}">{{ tag }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock content %}
+```
+
+If called like `https://www.example.com/tags/?tag=pancakes` it will return a list of documents
+with tag `pancakes`. If called without arguments, it will return a list of all available tags.
