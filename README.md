@@ -56,6 +56,25 @@ done in the template file, e.g.:
 {% endfor %}
 ```
 
+You can add a side-bar listing documents with the same tags by including something like:
+
+```
+<aside> 
+{% for tag in meta.tags %}
+    <h3>Mere under: <a href="{{ base_url }}/tags/?tag={{ tag }}">{{ tag }}</a></h3>
+    <ul>
+    {% for page in pages if page.title and page.meta.tags %}
+        {% if tag in page.meta.tags and not (page.id ends with 'index') and page.id != current_page.id %}
+        <li>
+            <a href="{{ page.url }}">{{ page.title }}</a> - {{ page.description }}
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endfor %}
+</aside> 
+```
+
 To create a dedicated tags page for either showing a list of available tags or a list of
 documents with a specific tag, use the builtin `tags_all()` function:
 
