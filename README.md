@@ -58,7 +58,7 @@ done in the template file, e.g.:
 
 You can add a side-bar listing documents with the same tags by including something like:
 
-```
+```twig
 <aside> 
 {% for tag in meta.tags %}
     <h3>Mere under: <a href="{{ base_url }}/tags/?tag={{ tag }}">{{ tag }}</a></h3>
@@ -92,7 +92,7 @@ Content can go here
 
 The tags template can look like this:
 
-```
+```twig
 {% extends "index.twig" %}
 {% set tag = url_param('tag', 'string') %}
 {% set tags = tags_all() %}
