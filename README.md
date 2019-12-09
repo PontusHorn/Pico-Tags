@@ -61,7 +61,7 @@ You can add a side-bar listing documents with the same tags by including somethi
 ```twig
 <aside> 
 {% for tag in meta.tags %}
-    <h3>Mere under: <a href="{{ base_url }}/tags/?tag={{ tag }}">{{ tag }}</a></h3>
+    <h3>More pages tagged: <a href="{{ base_url }}/tags/?tag={{ tag }}">{{ tag }}</a></h3>
     <ul>
     {% for page in pages if page.title and page.meta.tags %}
         {% if tag in page.meta.tags and not (page.id ends with 'index') and page.id != current_page.id %}
