@@ -76,7 +76,7 @@ You can add a sidebar listing documents with the same tags by including somethin
 ```
 
 To create a dedicated tags page for either showing a list of available tags or a list of
-documents with a specific tag, use the builtin `tags_all()` function:
+documents with a specific tag, use the builtin `get_all_tags()` function:
 
 Create a document `tags.md` in the root of the site:
 
