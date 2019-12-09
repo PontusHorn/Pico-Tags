@@ -96,7 +96,7 @@ class PicoTags extends AbstractPicoPlugin
      */
     public function onPageRendering(Twig_Environment &$twig, array &$twigVariables, &$templateName)
     {
-        $twig->addFunction(new Twig_SimpleFunction('get_all_tags', array($this, 'getTags')));
+        $twig->addFunction(new Twig_SimpleFunction('get_all_tags', array($this, 'getAllTags')));
     }
 
     public function getAllTags() {
