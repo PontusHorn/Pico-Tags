@@ -56,7 +56,7 @@ done in the template file, e.g.:
 {% endfor %}
 ```
 
-You can add a side-bar listing documents with the same tags by including something like:
+You can add a sidebar listing documents with the same tags by including something like:
 
 ```twig
 <aside> 
