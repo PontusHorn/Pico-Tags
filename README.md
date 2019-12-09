@@ -95,7 +95,7 @@ The tags template can look like this:
 ```twig
 {% extends "index.twig" %}
 {% set tag = url_param('tag', 'string') %}
-{% set tags = tags_all() %}
+{% set tags = get_all_tags() %}
 {% block content %}
 {{ parent() }}
 {% if tag %}
