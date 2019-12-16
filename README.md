@@ -16,9 +16,11 @@ Copy the file `PicoTags.php` to the `plugins` subdirectory of your Pico installa
 
 ## Usage
 
+### Basic usage
+
 To assign tags to a page, specify the `Tags` header inside the meta header block at the top of your file, e.g.:
 
-### In blog/my-first-blog-post.md
+#### In blog/my-first-blog-post.md
 ```
 ---
 Title: My first blog post
@@ -31,7 +33,7 @@ Template: blog-post
 
 To only show pages with certain tags on another page, use the `Filter` header, e.g.:
 
-### In blog/index.md
+#### In blog/index.md
 ```
 ---
 Title: Blog
@@ -45,7 +47,7 @@ These are all my blog posts:
 Actually looping through the filtered list of pages (in the above case, pages tagged `blog`) to display them would be
 done in the template file, e.g.:
 
-### In themes/default/blog-list.html
+#### In themes/default/blog-list.html
 ```twig
 {{ content }}
 {% for page in pages if page.title %}
@@ -81,7 +83,7 @@ You can list documents with the same tags as the current page by including somet
 
 The plugin also makes the function `get_all_tags()` available in your templates. This example uses it to create a dedicated tags page for either showing a list of available tags, or a list of documents with a specific tag:
 
-### In tags.md
+#### In tags.md
 ```
 ---
 Title: Tags
@@ -92,7 +94,7 @@ Content can go here
 
 ```
 
-### In themes/default/tags.html
+#### In themes/default/tags.html
 ```twig
 {% extends "index.twig" %}
 
