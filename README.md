@@ -56,7 +56,9 @@ done in the template file, e.g.:
 {% endfor %}
 ```
 
-You can add a sidebar listing documents with the same tags by including something like:
+### Listing related documents
+
+You can list documents with the same tags as the current page by including something like this in your template:
 
 ```twig
 <aside> 
@@ -75,11 +77,11 @@ You can add a sidebar listing documents with the same tags by including somethin
 </aside> 
 ```
 
-To create a dedicated tags page for either showing a list of available tags or a list of
-documents with a specific tag, use the builtin `get_all_tags()` function:
+### Listing all tags used on the site
 
-Create a document `tags.md` in the root of the site:
+The plugin also makes the function `get_all_tags()` available in your templates. This example uses it to create a dedicated tags page for either showing a list of available tags, or a list of documents with a specific tag:
 
+### In tags.md
 ```
 ---
 Title: Tags
@@ -90,12 +92,13 @@ Content can go here
 
 ```
 
-The tags template can look like this:
-
+### In themes/default/tags.html
 ```twig
 {% extends "index.twig" %}
+
 {% set tag = url_param('tag', 'string') %}
 {% set tags = get_all_tags() %}
+
 {% block content %}
 {{ parent() }}
 {% if tag %}
@@ -110,7 +113,6 @@ The tags template can look like this:
     {% endfor %}
     </ul>
 {% else %}
-    No tag given:
     <ul>
     {% for tag in tags %}
         <li><a href="{{current_page.url}}/?tag={{ tag }}">{{ tag }}</li>
@@ -120,5 +122,5 @@ The tags template can look like this:
 {% endblock content %}
 ```
 
-If called like `https://www.example.com/tags/?tag=pancakes` it will return a list of documents
-with tag `pancakes`. If called without arguments, it will return a list of all available tags.
+This would make e.g. `https://www.example.com/tags?tag=pancakes` show a list of documents
+with the tag `pancakes`, whereas `https://www.example.com/tags` would show a list of all available tags.
