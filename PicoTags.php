@@ -24,6 +24,11 @@ class PicoTags extends AbstractPicoPlugin
 {
 
     /**
+     * All tags used in all pages.
+     */
+    protected $allTags = [];
+
+    /**
      * Register the "Tags" and "Filter" meta header fields.
      *
      * @see    Pico::getMetaHeaders()
@@ -65,6 +70,14 @@ class PicoTags extends AbstractPicoPlugin
      */
     public function onPagesLoaded(&$pages, &$currentPage, &$previousPage, &$nextPage)
     {
+        foreach ($pages as $page) {
+            $tags = PicoTags::parseTags($page['meta']['tags']);
+            if ($page && !empty($tags)) {
+                $this->allTags = array_merge($this->allTags, $tags);
+            }
+            $this->allTags = array_unique($this->allTags);
+        }
+
         if ($currentPage && !empty($currentPage['meta']['filter'])) {
             $tagsToShow = $currentPage['meta']['filter'];
 
@@ -75,6 +88,18 @@ class PicoTags extends AbstractPicoPlugin
         }
     }
 
+    /**
+     * Register get_all_tags in Twig.
+     */
+    public function onTwigRegistration()
+    {
+        $this->getPico()->getTwig()->addFunction(new Twig_SimpleFunction('get_all_tags', array($this, 'getAllTags')));
+    }
+
+    public function getAllTags() {
+        return $this->allTags;
+    }
+    
     /**
      * Get array of tags from metadata string.
      *
