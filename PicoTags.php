@@ -89,14 +89,11 @@ class PicoTags extends AbstractPicoPlugin
     }
 
     /**
-     * Register Twig's get_all_tags.
-     * I don't know if it has to be in this method; just copying from http-params ;)
-     *
-     * @see DummyPlugin::onPageRendering()
+     * Register get_all_tags in Twig.
      */
-    public function onPageRendering(Twig_Environment &$twig, array &$twigVariables, &$templateName)
+    public function onTwigRegistration()
     {
-        $twig->addFunction(new Twig_SimpleFunction('get_all_tags', array($this, 'getAllTags')));
+        $this->getPico()->getTwig()->addFunction(new Twig_SimpleFunction('get_all_tags', array($this, 'getAllTags')));
     }
 
     public function getAllTags() {
