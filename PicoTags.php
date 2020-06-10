@@ -117,12 +117,17 @@ class PicoTags extends AbstractPicoPlugin
      */
     private static function parseTags($tags)
     {
-        if (!is_string($tags) || mb_strlen($tags) <= 0) {
+        $countTags = is_array($tags) || $tags instanceof Countable ? count($tags) : 0;
+        if (is_array($tags) && $countTags <= 0 || (!is_array($tags) && (!is_string($tags) || mb_strlen($tags) <= 0))) {
             return array();
         }
 
-        $tags = explode(',', $tags);
+        if (is_array($tags)) {
+            return $tags;
+        } else {
+            $tags = explode(',', $tags);
+            return is_array($tags) ? array_map('trim', $tags) : array();
+        }
 
-        return is_array($tags) ? array_map('trim', $tags) : array();
     }
 }
