@@ -44,6 +44,13 @@ Template: blog-post
 ---
 ```
 
+Optionally, you can also use YAML sequences for `Tags`:
+```
+Tags:
+  - blog
+  - pancakes
+```
+
 To only show pages with certain tags on another page, use the `Filter` header, e.g.:
 
 #### In blog/index.md
@@ -119,10 +126,16 @@ Content can go here
 {% if tag %}
     <ul>
     {% for page in pages if page.title and tags and not (page.id ends with 'index') %}
-        {% set pageTags = page.meta.tags|split(',') %}
+        {% if page.meta.tags is iterable %}
+            {% set pageTags = page.meta.tags %}
+            {% set showTags = page.meta.tags|join(',') %}
+        {% else %}
+            {% set pageTags = page.meta.tags|split(',') %}
+            {% set showTags = page.meta.tags %}
+        {% endif %}
         {% if tag in pageTags %}
             <li><a href="{{ page.url }}">
-            {{ page.title }} - {{ page.meta.tags }}</a>
+            {{ page.title }} - {{ showTags }}</a>
             </li>
         {% endif %}
     {% endfor %}

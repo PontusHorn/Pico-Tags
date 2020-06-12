@@ -117,6 +117,10 @@ class PicoTags extends AbstractPicoPlugin
      */
     private static function parseTags($tags)
     {
+        if (is_array($tags)) {
+            return $tags;
+        }
+
         if (!is_string($tags) || mb_strlen($tags) <= 0) {
             return array();
         }
