@@ -134,7 +134,7 @@ Content can go here
         {% endif %}
         
         {% for pageTag in pageTags %}
-            {% if tag in pageTags %}
+            {% if pageTag|trim == tag %}
                 <li>
                     <a href="{{ page.url }}">{{ page.title }}</a>
                 </li>
