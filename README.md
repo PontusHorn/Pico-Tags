@@ -124,25 +124,28 @@ Content can go here
 {% block content %}
 {{ parent() }}
 {% if tag %}
+    {# List of all pages with a specified tag #}
     <ul>
     {% for page in pages if page.title and tags and not (page.id ends with 'index') %}
         {% if page.meta.tags is iterable %}
             {% set pageTags = page.meta.tags %}
-            {% set showTags = page.meta.tags|join(',') %}
         {% else %}
             {% set pageTags = page.meta.tags|split(',') %}
-            {% set showTags = page.meta.tags %}
         {% endif %}
-        {% if tag in pageTags %}
-            <li><a href="{{ page.url }}">
-            {{ page.title }} - {{ showTags }}</a>
-            </li>
-        {% endif %}
+        
+        {% for pageTag in pageTags %}
+            {% if tag in pageTags %}
+                <li>
+                    <a href="{{ page.url }}">{{ page.title }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
     </ul>
 {% else %}
+    {# List of all tags used on the site #}
     <ul>
-    {% for tag in tags %}
+    {% for tag in tags|sort %}
         <li><a href="{{current_page.url}}/?tag={{ tag }}">{{ tag }}</li>
     {% endfor %}
     </ul>
